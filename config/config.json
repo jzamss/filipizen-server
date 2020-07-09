@@ -1,0 +1,18 @@
+{
+  "development": {
+      "config_id": "development",
+      "app_name": "filipize-server",
+      "app_desc": "Filipizen Web Server",
+      "node_port": 5000
+  },
+  "testing": {
+      "config_id": "testing"
+  },
+  "staging": {
+      "config_id": "staging"
+  },
+  "production": {
+      "config_id": "production",
+      "node_port": 5000
+  }
+}
