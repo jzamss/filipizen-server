@@ -10,8 +10,6 @@ const PaymentSuccess = (props) => {
   const [error, setError] = useState();
   const params = queryString.parse(props.location.search);
 
-  console.log("PARAMS", params);
-
   useEffect(() => {
     const loadPartner = async () => {
       const partnerSvc = await Service.lookup("CloudPartnerService", "partner");
