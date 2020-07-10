@@ -20,8 +20,8 @@ app.use(express.static("public"));
 const filipizenRoutes = require("./routes/filipizen");
 app.use("/filipizen", filipizenRoutes);
 
-const epaymentRoutes = require("./routes/epayment");
-app.use("/epayment", epaymentRoutes);
+const payoptionsRoutes = require("./routes/payoptions");
+app.use("/payoptions", payoptionsRoutes);
 
 /* filipizen client handler */
 app.get("/*", (req, res) => {

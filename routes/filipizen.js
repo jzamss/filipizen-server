@@ -51,7 +51,6 @@ router.get("/service/metainfo", async (req, res) => {
 });
 
 router.post("/service/invoke", async (req, res) => {
-  console.log("BODY", req.body)
   const { service, args } = req.body;
   const { name: methodName, action, connection: connName} = service;
   const connection = ctx.getConnection(connName);
@@ -80,7 +79,6 @@ router.post("/service/invoke", async (req, res) => {
     res.status(400).send(response.statusText)
   } else {
     const result = await response.json();
-    console.log("RESULT",result)
     res.json(result);
   }
 });
