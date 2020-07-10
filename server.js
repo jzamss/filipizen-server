@@ -1,9 +1,6 @@
 const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
-const serverContext = require("./lib/server-context");
-
-serverContext.findConnection("partner")
 
 const config = require("./config/config.js");
 const port = global.gConfig.node_port;

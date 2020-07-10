@@ -5,10 +5,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/service/metainfo", async (req, res) => {
-  console.log("QUERY", req.query)
-  const { serviceName, connection: connName  } = req.query; 
+  const { serviceName, connection: connName } = req.query;
   try {
-    const connection = ctx.findConnection(connName) 
+    const connection = ctx.getConnection(connName);
     let url = "http://";
     url += connection["app.host"];
     url += "/" + (connection["app.cluster"] || "osiris3");
@@ -30,24 +29,59 @@ router.get("/service/metainfo", async (req, res) => {
       let params = "";
 
       for (let idx = 0; idx < method.parameters.length; idx++) {
-        args += `p${idx},`
+        args += `p${idx},`;
         if (i > 0) params += ", ";
         params += `p${idx}`;
       }
       func += "this." + escapeMethodName(methodName) + "= function(";
       func += args;
       func += "handler) {\n";
-      func += "return this.proxy.invoke(\"" + methodName + "\"";
+      func += 'return this.proxy.invoke("' + methodName + '"';
       func += ",";
-      func += "[" + params + "]";;
+      func += "[" + params + "]";
       func += ", handler );\n";
       func += "};\n";
     }
-    func += "}"
+    func += "}";
     res.send(func);
   } catch (err) {
-    console.log(err)
-    res.status(404).send({error: err.toString()});
+    console.log(err);
+    res.status(404).send({ error: err.toString() });
+  }
+});
+
+router.post("/service/invoke", async (req, res) => {
+  const { service, args } = req.body;
+  const { name: methodName, action, connection: connName} = service;
+  const connection = ctx.getConnection(connName);
+
+  let url = "http://" + (connection["app.host"] || "localhost");
+  url += "/" + (connection["app.cluster"] || "osiris3");
+  url += "/json";
+  url += "/" + (connection["app.context"] || "enterprise");
+  url += "/" + methodName;
+  url += "." + action;
+
+  const hasArgs = Array.isArray(args) && args.length > 0;
+
+  console.log("ARGS", args);
+
+  const response = await fetch(url, {
+    method: "POST",
+    cache: "no-cache",
+    mode: "cors",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: hasArgs  ? JSON.stringify(args) : ""
+  });
+
+  if (response.status !== 200) {
+    res.status(400).send(response.statusText)
+  } else {
+    const result = await response.json();
+    res.json(result);
   }
 });
 
@@ -56,6 +90,6 @@ const escapeMethodName = (name) => {
     return `_${name}`;
   }
   return name;
-}
+};
 
 module.exports = router;
