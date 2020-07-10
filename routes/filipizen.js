@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/service/metainfo", async (req, res) => {
   const { serviceName, connection: connName } = req.query;
+  
   try {
     const connection = ctx.getConnection(connName);
     let url = "http://";
@@ -29,15 +30,14 @@ router.get("/service/metainfo", async (req, res) => {
       let params = "";
 
       for (let idx = 0; idx < method.parameters.length; idx++) {
-        args += `p${idx},`;
-        if (i > 0) params += ", ";
+        args += `p${idx}`;
+        if (idx > 0) params += ", ";
         params += `p${idx}`;
       }
       func += "this." + escapeMethodName(methodName) + "= function(";
-      func += args;
+      func += args + (args.length > 0 ? "," : "");
       func += "handler) {\n";
-      func += 'return this.proxy.invoke("' + methodName + '"';
-      func += ",";
+      func += 'return this.proxy.invoke("' + methodName + '",';
       func += "[" + params + "]";
       func += ", handler );\n";
       func += "};\n";
@@ -51,6 +51,7 @@ router.get("/service/metainfo", async (req, res) => {
 });
 
 router.post("/service/invoke", async (req, res) => {
+  console.log("BODY", req.body)
   const { service, args } = req.body;
   const { name: methodName, action, connection: connName} = service;
   const connection = ctx.getConnection(connName);
@@ -64,8 +65,6 @@ router.post("/service/invoke", async (req, res) => {
 
   const hasArgs = Array.isArray(args) && args.length > 0;
 
-  console.log("ARGS", args);
-
   const response = await fetch(url, {
     method: "POST",
     cache: "no-cache",
@@ -74,13 +73,14 @@ router.post("/service/invoke", async (req, res) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: hasArgs  ? JSON.stringify(args) : ""
+    body: hasArgs  ? JSON.stringify(args[0]) : ""
   });
 
   if (response.status !== 200) {
     res.status(400).send(response.statusText)
   } else {
     const result = await response.json();
+    console.log("RESULT",result)
     res.json(result);
   }
 });
