@@ -8,8 +8,8 @@ const router = express.Router();
 router.get("/service/metainfo", async (req, res) => {
   try {
     const { serviceName, connection} = req.query;
-    const svc = await serviceMgr.getService(serviceName, connection);
-    res.send(svc);
+    const meta = await serviceMgr.getServiceMeta(serviceName, connection);
+    res.send(meta);
   } catch(err) {
     res.status(400).send(err.toString());
   }
