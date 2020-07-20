@@ -23,7 +23,8 @@ router.post("/service/invoke", async (req, res) => {
   } catch (err) {
     res.status(400).send(err.toString());
   }
-});
+})
+
 
 router.get("/service/test", (req, res) => {
   res.send({status: "OK"});

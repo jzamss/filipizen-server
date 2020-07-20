@@ -12,12 +12,6 @@ let appServer;
 ========================*/
 const filipizenRoutes = require("./routes/filipizen");
 
-const getRouteFileName = (module, mapping) => {
-  const mappingPaths = mapping.path.split(":");
-  const routePaths = mappingPaths[1].split("/");
-  return 
-}
-
 const registerCustomRoutes = (module) => {
   const paths = module.path.split("/");
   module.resolvedPath = path.resolve(...paths);
@@ -27,25 +21,19 @@ const registerCustomRoutes = (module) => {
   }
 
   module.routeMappings = require(routePath);
-  console.log("MAPPING", module.routeMappings);
-
   const router = express.Router();
   module.routeMappings.forEach(mapping => {
-    const routeFileName = getRouteFileName(module, mapping);
+    router.post("/:action", async (req, res) => {
+      const urlPaths = req.originalUrl.split("/")
+      const handlerPath = path.resolve(module.resolvedPath, ...urlPaths);
+      const handler = require(handlerPath);
+      handler(req, res);
+    })
+    appServer.use(`${mapping.route}`, router);
   });
-  
-
-
-  // fs.readdirSync(modulePath, { withFileTypes: true }).forEach((f) => {
-  //   if (f.isDirectory()) {
-  //     const routeFile = path.resolve("modules", f.name, "routes.js") 
-  //     const routes = require(routeFile);
-  //     appServer.use(`/${f.name}`, routes);
-  //   }
-  // });
 };
 
-const registerRoutes = () => {
+const registerFilipizenRoutes = () => {
   appServer.use("/filipizen", filipizenRoutes);
 };
 
@@ -58,8 +46,8 @@ const loadModules = () => {
 
 const start = (app) => {
   appServer = app;
+  registerFilipizenRoutes();
   loadModules();
-  registerRoutes();
 };
 
 const getConnection = (connName) => {
