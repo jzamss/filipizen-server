@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const proxy = require("../lib/server-remote-proxy");
-const util = require("../lib/util");
+const proxy = require("../../lib/server-remote-proxy");
+const util = require("../../lib/util");
 const Service = proxy.getService();
 
 router.post("/landbanksuccess", async (req, res) => {

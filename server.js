@@ -1,6 +1,7 @@
 const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
+const anubis = require("./lib/anubis");
 
 const config = require("./config/config.js");
 const port = global.gConfig.node_port;
@@ -16,18 +17,14 @@ const clientBuildPath = path.join("client", "build");
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 app.use(express.static("public"));
 
-/* routes */
-const filipizenRoutes = require("./routes/filipizen");
-app.use("/filipizen", filipizenRoutes);
 
-const payoptionsRoutes = require("./routes/payoptions");
-app.use("/payoptions", payoptionsRoutes);
+anubis.start(app);
 
-/* filipizen client handler */
+
+/* filipizen client FALLBACK Handler */
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, clientBuildPath, "index.html"));
 });
-
 
 http.listen(port, (err) => {
   if (err) {
