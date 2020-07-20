@@ -1,7 +1,7 @@
 const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
-const anubis = require("./lib/anubis");
+const anubis = require("./anubis");
 
 const config = require("./config/config.js");
 const port = global.gConfig.node_port;
