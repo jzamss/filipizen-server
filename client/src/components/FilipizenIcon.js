@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "rsi-react-web";
+import { Image } from "rsi-react-web-components";
 
 
 const FilipizenIcon = (props) => {

@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Title, Panel, List, Link, Spacer, Subtitle } from "rsi-react-web";
+import { Title, Panel, List, Link, Spacer, Subtitle } from "rsi-react-web-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 
-import { PARTNER_SERVICES } from "../modules";
+import { getPartners } from "../modules";
 
 const styles = {
   list: {
@@ -38,7 +38,7 @@ const PartnerServiceList = (props) => {
 const PartnerScreen = (props) => {
   const { partnerId } = useParams();
   const { partner } = props.location.state;
-  const services = PARTNER_SERVICES.find(
+  const services = getPartners().find(
     (item) => item.objid === partnerId
   );
 

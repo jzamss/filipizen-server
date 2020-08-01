@@ -1,5 +1,5 @@
 import React from "react";
-import { Panel, AppBar } from "rsi-react-web"
+import { Panel, AppBar } from "rsi-react-web-components"
 
 const styles = {
   container: {

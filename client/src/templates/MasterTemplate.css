@@ -22,8 +22,9 @@
 }
 
 .template .content .panel .main {
-  flex: 3 0px;
+  flex: 2 0px;
   padding: 0 10px 0 10px;
+  background-color: whitesmoke;
 }
 
 .template .content .panel .aside {
@@ -47,11 +48,11 @@
     display: none;
   }
   .main{
-  width: 85%;
+    width: 60%;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   .aside-left {
     display: none;
   }

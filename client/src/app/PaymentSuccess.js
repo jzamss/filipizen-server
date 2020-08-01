@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as queryString from "query-string";
-import { Panel, Content, EPaymentSuccess, getService } from "rsi-react-web";
+import { Content, getService } from "rsi-react-web-components";
+import { EPaymentSuccess  } from "rsi-react-filipizen-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 
 const Service = getService();

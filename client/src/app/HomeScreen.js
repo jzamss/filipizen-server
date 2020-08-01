@@ -1,5 +1,5 @@
 import React from "react";
-import { Content, Label, Spacer, Panel, Button } from "rsi-react-web";
+import { Content, Label, Spacer, Panel, Button } from "rsi-react-web-components";
 
 import FilipizenIcon from "../components/FilipizenIcon";
 import FilipizenMasterTemplate from "../templates/FilipizenMasterTemplate";

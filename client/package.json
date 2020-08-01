@@ -7,12 +7,14 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bpls-web": "file:../../bpls-web",
+    "obo-web": "file:../../obo-web",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "rptis-web": "file:../../rptis-web",
-    "rsi-react-web": "file:../../rsi-react-web",
+    "rsi-react-filipizen-components": "file:../../rsi-react-filipizen-components",
+    "rsi-react-web-components": "file:../../rsi-react-web-components",
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
@@ -36,5 +38,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.254.114:5000"
+  "proxy": "http://192.168.1.7:5000"
 }

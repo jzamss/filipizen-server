@@ -12,7 +12,7 @@ import {
   getService,
   getNotification,
   Subtitle,
-} from "rsi-react-web";
+} from "rsi-react-web-components";
 import FilipizenMasterTemplate from "../templates/FilipizenMasterTemplate";
 
 const Service = getService();

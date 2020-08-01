@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "rsi-react-web";
+import { Image } from "rsi-react-web-components";
 import LguHeader from "../components/LguHeader";
 import FilipizenIcon from "../components/FilipizenIcon";
 import FilipizenMasterTemplate from "./FilipizenMasterTemplate";

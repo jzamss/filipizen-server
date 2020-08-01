@@ -1,28 +1,42 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Content, Panel, Title, Spacer } from "rsi-react-web";
+import { Content, Panel, Title, Spacer } from "rsi-react-web-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
-import * as modules from "./modules";
+import * as modules from "../modules";
 
 const getServiceComponent = (service) => {
   return modules[service.component];
 };
 
-const PartnerServiceService = (props) => {
-  const { partner, service } = useLocation().state;
+const getPartnerServiceInfo = (location) => {
+  if (location && location.state) {
+    return location.state;
+  } 
+  
+  const tokens = location.pathname.split("/");
+  const [_, __,  partnerId, moduleName, serviceName] = tokens;
+  const partner = modules.getPartners().find(p => p.objid === partnerId)
+  const module = partner.modules.find(m => m.name === moduleName);
+  const service = module.services.find(s => s.name === serviceName);
+  return {partner, module, service};
+}
+
+
+const PartnerServiceScreen = (props) => {
+  const location = useLocation();
+  const {partner, service, ...rest} = getPartnerServiceInfo(location);
   const ModuleComponent = getServiceComponent(service);
 
   return (
     <LguMasterTemplate partner={partner}>
       <Content center>
         <Panel>
-          <Spacer />
           <Title>{service.title}</Title>
-          <ModuleComponent {...props} partner={partner} service={service} />
+          <ModuleComponent {...props} partner={partner} service={service} {...rest}/>
         </Panel>
       </Content>
     </LguMasterTemplate>
   );
 };
 
-export default PartnerServiceService;
+export default PartnerServiceScreen;

@@ -1,6 +1,7 @@
 import React from "react";
 import MasterTemplate from "../templates/MasterTemplate";
 import FilipizenIcon from "../components/FilipizenIcon";
+import { Card } from "rsi-react-web-components";
 
 const Header = (props) => {
   return (
@@ -23,7 +24,7 @@ const FilipizenMasterTemplate = ({ children, ...rest }) => {
   return (
     <MasterTemplate logo={FilipizenIcon}>
       {showHeader && <Header />}
-      {children}
+        {children}
       <Footer />
     </MasterTemplate>
   );
