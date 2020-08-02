@@ -24,6 +24,8 @@
 .template .content .panel .main {
   flex: 2 0px;
   padding: 0 10px 0 10px;
+  /* background-color: whitesmoke; */
+  /* TODO: TEST ONLY REMOVE */
   background-color: whitesmoke;
 }
 

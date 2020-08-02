@@ -29,12 +29,10 @@ const PartnerServiceScreen = (props) => {
 
   return (
     <LguMasterTemplate partner={partner}>
-      <Content center>
-        <Panel>
-          <Title>{service.title}</Title>
-          <ModuleComponent {...props} partner={partner} service={service} {...rest}/>
-        </Panel>
-      </Content>
+      {/*
+      <Title>{service.title}</Title>
+     */}
+        <ModuleComponent {...props} partner={partner} service={service} {...rest}/>
     </LguMasterTemplate>
   );
 };

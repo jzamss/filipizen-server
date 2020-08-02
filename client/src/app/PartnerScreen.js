@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Title, Panel, List, Link, Spacer, Subtitle } from "rsi-react-web-components";
+import { Page, Title, Panel, List, Link, Spacer, Subtitle } from "rsi-react-web-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 
 import { getPartners } from "../modules";
@@ -54,12 +54,12 @@ const PartnerScreen = (props) => {
 
   return (
     <LguMasterTemplate partner={partner}>
-      <Panel>
+      <Page>
         <Spacer height={20} />
         <Title>Select Transaction</Title>
         <Spacer height={20} />
         <PartnerServiceList services={services} onSelect={onSelectService} />
-      </Panel>
+      </Page>
     </LguMasterTemplate>
   );
 };

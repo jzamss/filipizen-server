@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
+  Page,
   Title,
   Panel,
   Label,
@@ -9,13 +10,12 @@ import {
   Spacer,
   CircularProgress,
   groupBy,
-  getService,
+  Service,
   getNotification,
   Subtitle,
 } from "rsi-react-web-components";
 import FilipizenMasterTemplate from "../templates/FilipizenMasterTemplate";
 
-const Service = getService();
 const notification = getNotification();
 
 const PartnerListScreen = (props) => {
@@ -58,11 +58,12 @@ const PartnerListScreen = (props) => {
 
   return (
     <FilipizenMasterTemplate>
-      <Spacer height={20} />
-      <Title>Select a Partner Agency</Title>
-      {loading && <CircularProgress size={20} />}
-      <Spacer height={20} />
-      {!loading && <PartnerList partners={partners} />}
+      <Page>
+        <Title>Select a Partner Agency</Title>
+        {loading && <CircularProgress size={20} />}
+        <Spacer height={20} />
+        {!loading && <PartnerList partners={partners} />}
+      </Page>
     </FilipizenMasterTemplate>
   );
 };
@@ -109,5 +110,11 @@ const PartnerList = (props) => {
     </Panel>
   );
 };
+
+const styles = {
+  container: {
+    margin: 20,
+  }
+}
 
 export default PartnerListScreen;

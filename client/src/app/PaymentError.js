@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as queryString from "query-string";
-import { Panel, getService } from "rsi-react-web-components";
+import { Panel, Service } from "rsi-react-web-components";
 import { EPaymentError } from "rsi-react-filipizen-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 
-const Service = getService();
 const PaymentError = (props) => {
   const [partner, setPartner] = useState();
   const [error, setError] = useState();

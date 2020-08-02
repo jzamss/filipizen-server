@@ -1,6 +1,5 @@
 import React from "react";
 import "./MasterTemplate.css";
-import { Card } from "rsi-react-web-components"
 
 const getChildren = ({ children }) => {
   const comps = {
@@ -13,10 +12,7 @@ const getChildren = ({ children }) => {
   React.Children.forEach(children, (child) => {
     if (child) {
       let target = child.props.target || "center";
-      const childType =
-        typeof child.type === "string" ? child.type : child.type.name;
-        console.log("childType", childType)
-      
+      const childType = typeof child.type === "string" ? child.type : child.type.name;
       if (/header/i.test(childType)) target = "header";
       else if (/footer/i.test(childType)) target = "footer";
       if (!comps[target]) comps[target] = [];
@@ -33,13 +29,13 @@ const MasterTemplate = (props) => {
       <div className="row header">{header}</div>
       <div className="content">
         <div className="panel">
+        {/* 
           <aside className="aside aside-left">{left}</aside>
-          <div className="main">
-          <Card>
-          {center}
-          </Card>
-          </div>
-          <aside className="aside aside-right">{right}</aside>
+        */}
+          <div className="main">{center} </div>
+          {/* 
+            <aside className="aside aside-right">{right}</aside>
+        */}
         </div>
       </div>
       <div className="row footer">{footer}</div>

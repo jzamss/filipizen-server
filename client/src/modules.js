@@ -9,6 +9,7 @@ export const getPartners = () => {
     {
       objid: "test",
       name: "Test",
+      orgcode: "000",
       modules: [
         {
           name: "bpls",

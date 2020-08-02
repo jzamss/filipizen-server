@@ -1,5 +1,5 @@
 import React from "react";
-import { Content, Label, Spacer, Panel, Button } from "rsi-react-web-components";
+import { Page, Label, Spacer, Panel, Button } from "rsi-react-web-components";
 
 import FilipizenIcon from "../components/FilipizenIcon";
 import FilipizenMasterTemplate from "../templates/FilipizenMasterTemplate";
@@ -11,7 +11,7 @@ const HomeScreen = (props) => {
 
   return (
     <FilipizenMasterTemplate showHeader={false}>
-      <Content>
+      <Page>
         <Spacer height={60} />
         <FilipizenIcon width={200} />
         <Spacer height={30} />
@@ -30,7 +30,7 @@ const HomeScreen = (props) => {
             onClick={startHandler}
           />
         </Panel>
-      </Content>
+      </Page>
     </FilipizenMasterTemplate>
   );
 };
