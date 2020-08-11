@@ -12,7 +12,7 @@ const PaymentSuccess = (props) => {
 
   useEffect(() => {
     const loadPartner = async () => {
-      const partnerSvc = await Service.lookup("CloudPartnerService", "partner");
+      const partnerSvc = await Service.lookupAsync("CloudPartnerService", "partner");
       return await partnerSvc.findById({ id: params.orgcode });
     };
 

@@ -16,7 +16,9 @@ import {
 } from "rsi-react-web-components";
 import FilipizenMasterTemplate from "../templates/FilipizenMasterTemplate";
 
+const svc = Service.lookup("CloudPartnerService", "partner");
 const notification = getNotification();
+
 
 const PartnerListScreen = (props) => {
   const [loading, setLoading] = useState(true);
@@ -44,16 +46,13 @@ const PartnerListScreen = (props) => {
   });
 
   React.useEffect(() => {
-    const getList = async () => {
-      const svc = await Service.lookup("CloudPartnerService", "partner");
-      return await svc.getList();
-    };
-
     setLoading(true);
-    getList().then((list) => {
-      setLoading(false);
-      setPartners(list);
-    });
+    svc.getList((err, list) => {
+      if (!err) {
+        setLoading(false);
+        setPartners(list);
+      }
+    })
   }, []);
 
   return (
