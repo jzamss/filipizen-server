@@ -20,7 +20,7 @@ export const getPartners = () => {
               name: "bpbilling",
               title: "Business Online Billing",
               lib: "bpls-web",
-              component: "OnlineBillingWebController",
+              component: "BplsBillingWebController",
             },
             {
               module: "bpls",
@@ -38,7 +38,7 @@ export const getPartners = () => {
               name: "rptbilling",
               title: "Realty Tax Online Billing",
               lib: "rptis-web",
-              component: "RptisBillingWebController",
+              component: "RptBillingWebController",
             },
           ],
         },

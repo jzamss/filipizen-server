@@ -25,14 +25,14 @@ const getPartnerServiceInfo = (location) => {
 const PartnerServiceScreen = (props) => {
   const location = useLocation();
   const {partner, service, ...rest} = getPartnerServiceInfo(location);
-  const ModuleComponent = getServiceComponent(service);
+  const ServiceComponent = getServiceComponent(service);
 
   return (
     <LguMasterTemplate partner={partner}>
       {/*
       <Title>{service.title}</Title>
      */}
-        <ModuleComponent {...props} partner={partner} service={service} {...rest}/>
+        <ServiceComponent {...props} partner={partner} service={service} {...rest}/>
     </LguMasterTemplate>
   );
 };
