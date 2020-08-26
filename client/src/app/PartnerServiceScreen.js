@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Content, Panel, Title, Spacer } from "rsi-react-web-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 import * as modules from "../modules";
 
@@ -14,6 +13,7 @@ const getPartnerServiceInfo = (location) => {
   } 
   
   const tokens = location.pathname.split("/");
+  console.log("partnerId", partnerId)
   const [_, __,  partnerId, moduleName, serviceName] = tokens;
   const partner = modules.getPartners().find(p => p.objid === partnerId)
   const module = partner.modules.find(m => m.name === moduleName);

@@ -38,6 +38,7 @@ const PartnerServiceList = (props) => {
 const PartnerScreen = (props) => {
   const { partnerId } = useParams();
   const { partner } = props.location.state;
+  console.log("partnerId", partnerId)
   const services = getPartners().find(
     (item) => item.objid === partnerId
   );
