@@ -13,8 +13,11 @@ content-type: application/json
     "dateTime": "2020-08-31T12:00:00-07:00",
     "timeZone": "Asia/Manila"
   },
-  "recurrence": ["RRULE:FREQ=DAILY;COUNT=2"],
-  "attendees": [{ "email": "jzamss@gmail.com" }],
+  "recurrence": ["RRULE:FREQ=DAILY;COUNT=1"],
+  "attendees": [
+    { "email": "jzamss@gmail.com" },
+    { "email": "elmonazareno@gmail.com" }
+  ],
   "reminders": {
     "useDefault": false,
     "overrides": [

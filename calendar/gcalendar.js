@@ -3,8 +3,6 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 
-// const calendarRoutes = require("");
-
 // If modifying these scopes, delete token.json.
 const SCOPES = [
     'https://www.googleapis.com/auth/calendar.readonly', 
@@ -23,91 +21,40 @@ const loadCredentials = () => {
   CREDENTIALS = JSON.parse(content);
 }
 
-
 let appServer;
-
-// const registerRoutes = () => {
-//   appServer.use("/calandar", calendarRoutes);
-//   console.log("calendar routes regisered")
-// };
 
 const init = (app) => {
   appServer = app;
   loadCredentials();
-  // registerRoutes();
 }
 
-const eventTemplate = {
-  summary: 'OBO Inspection 2',
-  location: 'Talisay City',
-  description: 'Residential House',
-  start: {
-    dateTime: '2020-08-28T09:00:00-07:00',
-    timeZone: 'Asia/Manila',
-  },
-  end: {
-    dateTime: '2020-08-28T12:00:00-07:00',
-    timeZone: 'Asia/Manila',
-  },
-  recurrence: [
-    'RRULE:FREQ=DAILY;COUNT=2'
-  ],
-  attendees: [
-    {email: 'jzamss@gmail.com'},
-  ],
-  reminders: {
-    useDefault: false,
-    overrides: [
-      {method: 'email', minutes: 24 * 60},
-      {method: 'popup', minutes: 10},
-    ],
-  },
-};
-
-
-const scheduleEvent = async (info = {}) => {
-  const event = {...eventTemplate, ...info}
-  return await authorize((auth) => postEvent(auth, event));
-}
-
-const postEvent = (auth, newEvent) => {
-  const calendar = google.calendar({version: 'v3', auth});
-  return new Promise((resolve, reject) => {
+const insertEvent = (event) => {
+  const insert = (auth, newEvent) => {
+    const calendar = google.calendar({version: 'v3', auth});
     calendar.events.insert({
       auth: auth,
       calendarId: 'primary',
       resource: newEvent,
     }, function(err, event) {
       if (err) {
-        reject('There was an error contacting the Calendar service: ' + err);
-        // console.log('There was an error contacting the Calendar service: ' + err);
-        // return;
+        console.log('There was an error contacting the Calendar service: ' + err);
       } else {
         console.log(`Event ${event.data.htmlLink} successfully posted`);
-        resolve(event.data.htmlLink);
       }
-    });
-  })
+  })};
+  authorize(event, insert);
 }
 
-const authorize = (callback) => {
+const authorize = (event, callback) => {
   const {client_secret, client_id, redirect_uris} = CREDENTIALS.installed;
   const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
-  // check stored a token
-  return new Promise((resolve, reject) => {
-    fs.readFile(TOKEN_PATH, (err, token) => {
-      if (err) return getAccessToken(oAuth2Client, callback);
-      oAuth2Client.setCredentials(JSON.parse(token));
-      callback(oAuth2Client)
-        .then(data => resolve(data))
-        .catch(err => reject(err))
-    });
-  })
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getAccessToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client, event);
+  });
 }
-
-
-
 
 
 /**
@@ -143,5 +90,5 @@ function getAccessToken(oAuth2Client, callback) {
 
 module.exports = {
   init,
-  scheduleEvent
+  insertEvent
 }
