@@ -3,6 +3,8 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 
+// const calendarRoutes = require("");
+
 // If modifying these scopes, delete token.json.
 const SCOPES = [
     'https://www.googleapis.com/auth/calendar.readonly', 
@@ -12,17 +14,27 @@ const SCOPES = [
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = 'token.json';
+const TOKEN_PATH = path.resolve("calendar",'token.json');
+const CREDENTIALS_PATH = path.resolve("calendar",'credentials.json');
 let CREDENTIALS;
 
 const loadCredentials = () => {
-  const credentialFile = path.resolve("calendar",'credentials.json');
-  const content = fs.readFileSync(credentialFile);
+  const content = fs.readFileSync(CREDENTIALS_PATH);
   CREDENTIALS = JSON.parse(content);
 }
 
-const init = () => {
+
+let appServer;
+
+// const registerRoutes = () => {
+//   appServer.use("/calandar", calendarRoutes);
+//   console.log("calendar routes regisered")
+// };
+
+const init = (app) => {
+  appServer = app;
   loadCredentials();
+  // registerRoutes();
 }
 
 const eventTemplate = {
@@ -122,7 +134,6 @@ function getAccessToken(oAuth2Client, callback) {
       // Store the token to disk for later program executions
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
         if (err) return console.error(err);
-        console.log('Token stored to', TOKEN_PATH);
       });
       callback(oAuth2Client);
     });

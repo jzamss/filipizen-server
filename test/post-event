@@ -1,4 +1,4 @@
-POST http://localhost:5000/calendar/insert HTTP/1.1
+POST http://192.168.254.131:5000/calendar/event/insert HTTP/1.1
 content-type: application/json
 
 {
@@ -6,11 +6,11 @@ content-type: application/json
   "location": "Cebu City",
   "description": "Monthly",
   "start": {
-    "dateTime": "2020-08-30T09:00:00-07:00",
+    "dateTime": "2020-08-31T09:00:00-07:00",
     "timeZone": "Asia/Manila"
   },
   "end": {
-    "dateTime": "2020-08-30T12:00:00-07:00",
+    "dateTime": "2020-08-31T12:00:00-07:00",
     "timeZone": "Asia/Manila"
   },
   "recurrence": ["RRULE:FREQ=DAILY;COUNT=2"],
