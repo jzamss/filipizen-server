@@ -11,20 +11,22 @@ const getPartnerServiceInfo = (location) => {
   if (location && location.state) {
     return location.state;
   } 
-  
-  const tokens = location.pathname.split("/");
-  const [_, __,  partnerId, moduleName, serviceName] = tokens;
-  const partner = modules.getPartners().find(p => p.objid === partnerId)
-  const module = partner.modules.find(m => m.name === moduleName);
-  const service = module.services.find(s => s.name === serviceName);
-  return {partner, module, service};
+  return {};
+  // TODO
+  // const tokens = location.pathname.split("/");
+  // const [_, __,  partnerId, moduleName, serviceName] = tokens;
+  // const partner = modules.getPartners().find(p => p.objid === partnerId)
+  // const module = partner.modules.find(m => m.name === moduleName);
+  // const service = module.services.find(s => s.name === serviceName);
+  // return {partner, module, service};
 }
-
 
 const PartnerServiceScreen = (props) => {
   const location = useLocation();
-  const {partner, service, ...rest} = getPartnerServiceInfo(location);
-  const ServiceComponent = getServiceComponent(service);
+  const {partner, module, service, ...rest} = getPartnerServiceInfo(location);
+  
+  if (!service)  return null;
+  const ServiceComponent =  getServiceComponent(service);
 
   return (
     <LguMasterTemplate partner={partner}>

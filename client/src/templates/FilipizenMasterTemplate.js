@@ -1,11 +1,14 @@
 import React from "react";
 import MasterTemplate from "../templates/MasterTemplate";
 import FilipizenIcon from "../components/FilipizenIcon";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
     <div style={styles.header}>
-      <FilipizenIcon />
+      <Link to="/">
+        <FilipizenIcon />
+      </Link>
     </div>
   );
 };
