@@ -2,8 +2,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
 const anubis = require("./anubis");
-const gcalendar = require("./calendar/gcalendar");
-const calendarRoutes = require("./routes/calendar");
 
 const config = require("./config/config.js");
 const port = global.gConfig.node_port;
@@ -18,10 +16,8 @@ app.use(bodyParser.json());
 const clientBuildPath = path.join("client", "build");
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 app.use(express.static("public"));
-app.use("/calendar", calendarRoutes);
 
 anubis.start(app);
-gcalendar.init(app);
 
 /* filipizen client FALLBACK Handler */
 app.get("/*", (req, res) => {
