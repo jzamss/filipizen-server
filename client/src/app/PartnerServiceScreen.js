@@ -13,7 +13,6 @@ const getPartnerServiceInfo = (location) => {
   } 
   
   const tokens = location.pathname.split("/");
-  console.log("partnerId", partnerId)
   const [_, __,  partnerId, moduleName, serviceName] = tokens;
   const partner = modules.getPartners().find(p => p.objid === partnerId)
   const module = partner.modules.find(m => m.name === moduleName);
@@ -29,10 +28,7 @@ const PartnerServiceScreen = (props) => {
 
   return (
     <LguMasterTemplate partner={partner}>
-      {/*
-      <Title>{service.title}</Title>
-     */}
-        <ServiceComponent {...props} partner={partner} service={service} {...rest}/>
+      <ServiceComponent {...props} partner={partner} service={service} {...rest}/>
     </LguMasterTemplate>
   );
 };

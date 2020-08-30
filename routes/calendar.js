@@ -12,7 +12,7 @@ router.post("/event/insert", async (req, res) => {
     res.send({staus: "OK"});
   } else {
     try {
-      const html = await calendar.insertEvent(eventInfo);
+      const html = calendar.insertEvent(eventInfo);
       console.log("Calendar event sent.");
       res.send({status: "OK", html});
     } catch (err) {
@@ -21,6 +21,15 @@ router.post("/event/insert", async (req, res) => {
     }
   }
 })
+
+
+const testEvent = require("../test/test-event");
+router.get("/event/insert", async (req, res) => {
+  const { event, args } = req.body;
+  const html = calendar.insertEvent(testEvent);
+  res.send({status: "OK", html});
+})
+  
 
 const getEventInfo = (req) => {
   if (req.body.data) {

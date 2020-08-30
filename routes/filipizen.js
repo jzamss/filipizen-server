@@ -13,6 +13,32 @@ router.get("/service/metainfo", async (req, res) => {
   }
 });
 
+const testEvent = {
+  summary: "Rameses Meeting",
+  location: "Cebu City",
+  description: "Monthly",
+  start: {
+    dateTime: "2020-08-31T09:00:00-07:00",
+    timeZone: "Asia/Manila"
+  },
+  end: {
+    dateTime: "2020-08-31T12:00:00-07:00",
+    timeZone: "Asia/Manila"
+  },
+  recurrence: ["RRULE:FREQ=DAILY;COUNT=1"],
+  attendees: [
+    { email: "jzamss@gmail.com" },
+    { email: "elmonazareno@gmail.com" }
+  ],
+  reminders: {
+    useDefault: false,
+    overrides: [
+      { method: "email", minutes: 1440 },
+      { method: "popup", minutes: 10 }
+    ]
+  }
+}
+
 router.post("/service/invoke", async (req, res) => {
   const { service, args } = req.body;
   const { name: methodName, action, connection } = service;

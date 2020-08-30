@@ -1,4 +1,4 @@
-POST http://192.168.254.131:5000/calendar/event/insert HTTP/1.1
+POST http://192.168.1.7:5000/calendar/event/insert HTTP/1.1
 content-type: application/json
 
 {
