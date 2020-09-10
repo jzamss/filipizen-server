@@ -32,7 +32,9 @@ const MasterTemplate = (props) => {
           <div className="main">{center} </div>
         </div>
       </div>
-      <div className="row footer">{footer}</div>
+      {/**
+        <div className="row footer">{footer}</div>
+       */}
     </div>
   );
 };

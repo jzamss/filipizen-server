@@ -40,6 +40,9 @@ const styles = {
     paddingLeft: "50px",
   },
   footer: {
+    position: "absolute",
+    bottom: 0,
+    width : "98%",
     padding: '8px',
     backgroundColor: '#ecf0f1',
     borderTop: '3px solid #2c3e50',
