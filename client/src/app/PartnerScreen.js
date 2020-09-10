@@ -48,7 +48,7 @@ const PartnerScreen = (props) => {
   };
 
   return (
-    <LguMasterTemplate partner={partner}>
+    <LguMasterTemplate partner={partner} location={props.location} history={props.history}>
       <Page>
         <Spacer height={20} />
         <Title>Select Transaction</Title>

@@ -50,7 +50,7 @@
     display: none;
   }
   .main{
-    width: 60%;
+    width: 960px;
   }
 }
 
@@ -62,6 +62,6 @@
     display: none;
   }
   .main{
-    width: 1005;
+    width: 960;
   }
 }

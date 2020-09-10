@@ -29,13 +29,7 @@ const MasterTemplate = (props) => {
       <div className="row header">{header}</div>
       <div className="content">
         <div className="panel">
-        {/* 
-          <aside className="aside aside-left">{left}</aside>
-        */}
           <div className="main">{center} </div>
-          {/* 
-            <aside className="aside aside-right">{right}</aside>
-        */}
         </div>
       </div>
       <div className="row footer">{footer}</div>

@@ -3,4 +3,5 @@
 node_modules
 connections
 _custom
+_res
 push.sh

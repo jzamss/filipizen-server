@@ -26,7 +26,8 @@ const modules = [
     services: [
       { name: 'bldgpermit', title: "Building Permit Application", component: "BuildingPermitWebController" },
       { name: 'occupancypermit', title: "Occupancy Permit Application", component: "OccupancyPermitWebController" },
-      { name: 'registerprofessionals', title: "Register Professionals", component: "ProfessionalWebController" },
+      { name: 'registerprofessionals', title: "Register Professional", component: "ProfessionalWebController" },
+      { name: 'apptracking', title: "Application Tracking", component: "AppTrackingWebController" },
     ]
   },
 ];
