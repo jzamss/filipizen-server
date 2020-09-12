@@ -4,7 +4,6 @@ import LguHeader from "../components/LguHeader";
 import FilipizenIcon from "../components/FilipizenIcon";
 import FilipizenMasterTemplate from "./FilipizenMasterTemplate";
 
-//TODO:
 const getLguLogo = (partner) => {
 
   return (

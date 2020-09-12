@@ -6,7 +6,7 @@ import LguMasterTemplate from "../templates/LguMasterTemplate";
 
 
 const PaymentSuccess = (props) => {
-  const [partner, setPartner] = useState();
+  const [partner, setPartner] = useState({});
   const [error, setError] = useState();
   const params = queryString.parse(props.location.search);
 
@@ -19,7 +19,7 @@ const PaymentSuccess = (props) => {
     loadPartner()
       .then(setPartner)
       .catch((err) => setError(err.toString()));
-  }, [params.orgcode]);
+  }, []);
 
   const gotoPartnerService = () => {
     props.history.replace({

@@ -1,6 +1,7 @@
 export * from "rptis-web";
 export * from "bpls-web";
 export * from "obo-web";
+export * from "waterworks-web";
 
 
 // Module and Server registration 
@@ -30,16 +31,25 @@ const modules = [
       { name: 'apptracking', title: "Application Tracking", component: "AppTrackingWebController" },
     ]
   },
+  { 
+    name: "waterworks", 
+    title: "Waterworks",
+    services: [
+      { name: 'waterworksbilling', title: "Waterworks Billing", component: "WaterworksBillingWebController" },
+    ]
+  },
 ];
 
 export const getModules = (partner) => {
   const pattern = partner.includeservices || ".*";
+  console.log("pattern", pattern)
   const regex = new RegExp(`(${pattern})`, "i");
   const partnerModules = [...modules];
   partnerModules.forEach(module => {
     const parterServices = module.services.filter(service => regex.test(service.name));
     module.services = parterServices;
   });
+  console.log("partnerModules",partnerModules);
   return partnerModules;
 }
 
