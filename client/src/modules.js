@@ -42,14 +42,12 @@ const modules = [
 
 export const getModules = (partner) => {
   const pattern = partner.includeservices || ".*";
-  console.log("pattern", pattern)
   const regex = new RegExp(`(${pattern})`, "i");
   const partnerModules = [...modules];
   partnerModules.forEach(module => {
     const parterServices = module.services.filter(service => regex.test(service.name));
     module.services = parterServices;
   });
-  console.log("partnerModules",partnerModules);
   return partnerModules;
 }
 

@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Remote Tester</title>
+  </head>
+  <body>
+    <h1>Remote Test</h1>
+    <form id="form" method="POST" action="/admin/remote/invoke">
+      <div class="row">
+        <label>Channel</label>
+        <input name="channel" value="137" />
+      </div>
+      <div class="row">
+        <label>Service Name</label>
+        <input name="servicename" value="WaterworksBillingService" />
+      </div>
+      <div class="row">
+          <label>Method Name</label>
+          <input name="method" value="getBilling" />
+      </div>
+      <div class="row">
+        <label>Parameters (json)</label>
+        <input name="parameters" />
+      </div>
+      <input type="submit" value="Execute">
+    </form>
+    <style>
+      .row {
+        display: block;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Remote Tester
+  body
+
+  style(type="text/css").
+    html, body {
+        margin: 20;
+    }
+
+    .container {
+      width: 300;
+    }
+    .row {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 0;
+      margin-bottom: 10px;
+    }
+    .result {
+      width: 600px;
+    }
+
+
+  h1 Remote Tester
+
+  form(method="post" action="/admin/remote/invoke")
+    div(class="container")
+      div(class="row")
+        label Channel
+        input(name="channel" value="000")
+
+      div(class="row")
+        label Service Name
+        input(name="service" value="EPaymentService")
+
+      div(class="row")
+        label Method Name
+        input(name="method" value="getBilling")
+      
+      div(class="row")
+        label Parameters
+        textarea(name="parameters" value="" multiline rows=5)
+      
+      div(class="row result")
+        label Result
+        textarea(rows=5).form-control.
+          #{result}
+
+      input(type="submit" value="Execute")

@@ -13,37 +13,11 @@ router.get("/service/metainfo", async (req, res) => {
   }
 });
 
-const testEvent = {
-  summary: "Rameses Meeting",
-  location: "Cebu City",
-  description: "Monthly",
-  start: {
-    dateTime: "2020-08-31T09:00:00-07:00",
-    timeZone: "Asia/Manila"
-  },
-  end: {
-    dateTime: "2020-08-31T12:00:00-07:00",
-    timeZone: "Asia/Manila"
-  },
-  recurrence: ["RRULE:FREQ=DAILY;COUNT=1"],
-  attendees: [
-    { email: "jzamss@gmail.com" },
-    { email: "elmonazareno@gmail.com" }
-  ],
-  reminders: {
-    useDefault: false,
-    overrides: [
-      { method: "email", minutes: 1440 },
-      { method: "popup", minutes: 10 }
-    ]
-  }
-}
-
 router.post("/service/invoke", async (req, res) => {
   const { service, args } = req.body;
-  const { name: methodName, action, connection } = service;
+  const { name: serviceName, action, connection } = service;
   try {
-    const svc = await serviceMgr.getService(methodName, action, connection);
+    const svc = await serviceMgr.getService(serviceName, action, connection);
     const data = await svc.invoke(args);
     res.send(data);
   } catch (err) {
@@ -51,9 +25,35 @@ router.post("/service/invoke", async (req, res) => {
   }
 })
 
+const getPaymentOrder = async (refno) => {
+  const svc = await serviceMgr.getService("CloudPaymentService", "getPaymentOrder", "epayment");
+  const po = await svc.invoke([{refno}]);
+  return po;
+}
 
-router.get("/service/test", (req, res) => {
-  res.send({status: "OK"});
+const getPaymentPartnerOption = async ({paymentorder, payoption}) => {
+  const svc = await serviceMgr.getService("CloudPaymentService", "getPaymentPartnerOption", "epayment");
+  return await svc.invoke([{paymentorder, payoption}]);
+}
+
+router.post("/epayment/sendtopartner", async (req, res) => {
+  try {
+    const po = await getPaymentOrder(req.body.refno);
+    const payoption = await getPaymentPartnerOption({paymentorder: po, payoption: req.body.payoption});
+
+    let formaction = payoption.paypartner.info && payoption.paypartner.info.testactionurl; 
+    if (payoption.paypartner && payoption.paypartner.checkout) {
+      formaction = payoption.paypartner.checkout.redirectUrl;
+    } 
+    if ( !formaction ) {
+      formaction = payoption.paypartner.actionurl;
+    }
+
+    res.redirect(formaction);
+  } catch (err) {
+    res.status(400).send(err.toString());
+  }
+  
 })
 
 module.exports = router;

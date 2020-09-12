@@ -12,6 +12,12 @@ const http = require("http").createServer(app);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.set('view engine', 'pug');
+
+/* admin */
+const adminRoutes = require("./routes/admin");
+app.use("/admin", adminRoutes);
+
 /* setup client */
 const clientBuildPath = path.join("client", "build");
 app.use(express.static(path.join(__dirname, clientBuildPath)));
@@ -23,6 +29,7 @@ anubis.start(app);
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, clientBuildPath, "index.html"));
 });
+
 
 http.listen(port, (err) => {
   if (err) {
