@@ -31,7 +31,7 @@ const PaymentSuccess = (props) => {
   return (
     <LguMasterTemplate partner={partner}>
       <Content center>
-        <EPaymentSuccess onClose={gotoPartnerService} />
+        <EPaymentSuccess onClose={gotoPartnerService} {...props} />
       </Content>
     </LguMasterTemplate>
   );

@@ -18,12 +18,12 @@ app.set('view engine', 'pug');
 const adminRoutes = require("./routes/admin");
 app.use("/admin", adminRoutes);
 
+anubis.start(app);
+
 /* setup client */
 const clientBuildPath = path.join("client", "build");
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 app.use(express.static("public"));
-
-anubis.start(app);
 
 /* filipizen client FALLBACK Handler */
 app.get("/*", (req, res) => {

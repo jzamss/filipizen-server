@@ -13,7 +13,7 @@ const LguHeader = (props) => {
     <AppBar>
         <Panel style={styles.container}>
           <Link to={{
-            pathname: `/partner/${props.partner.name}/services`, 
+            pathname: `/partner/${props.partner?.name}/services`, 
             state: {partner: props.partner}
           }}>
             <Panel width={270}>{props.Logo}</Panel>

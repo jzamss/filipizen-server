@@ -12,13 +12,6 @@ const getPartnerServiceInfo = (location) => {
     return location.state;
   } 
   return {};
-  // TODO
-  // const tokens = location.pathname.split("/");
-  // const [_, __,  partnerId, moduleName, serviceName] = tokens;
-  // const partner = modules.getPartners().find(p => p.objid === partnerId)
-  // const module = partner.modules.find(m => m.name === moduleName);
-  // const service = module.services.find(s => s.name === serviceName);
-  // return {partner, module, service};
 }
 
 const PartnerServiceScreen = (props) => {

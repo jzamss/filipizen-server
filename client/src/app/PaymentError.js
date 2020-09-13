@@ -30,7 +30,7 @@ const PaymentError = (props) => {
   return (
     <LguMasterTemplate partner={partner}>
       <Panel>
-        <EPaymentError onClose={gotoPartnerService}/>
+        <EPaymentError onClose={gotoPartnerService} {...props} />
       </Panel>
     </LguMasterTemplate>
   );

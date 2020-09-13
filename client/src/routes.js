@@ -20,12 +20,12 @@ export default [
   },
   {
     name: "success",
-    path: "/payoptions/success",
+    path: "/payment/success",
     component: PaymentSuccess,
   },
   {
     name: "error",
-    path: "/payoptions/error",
+    path: "/payment/error",
     component: PaymentError,
-  }  
+  },
 ];

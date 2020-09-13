@@ -25,35 +25,54 @@ router.post("/service/invoke", async (req, res) => {
   }
 })
 
-const getPaymentOrder = async (refno) => {
-  const svc = await serviceMgr.getService("CloudPaymentService", "getPaymentOrder", "epayment");
-  const po = await svc.invoke([{refno}]);
-  return po;
+
+const postPartnerPayment = async (params) => {
+  const svc = await serviceMgr.getService("CloudPaymentService", "postPartnerPayment", "epayment");
+  return await svc.invoke([params]);
 }
 
-const getPaymentPartnerOption = async ({paymentorder, payoption}) => {
-  const svc = await serviceMgr.getService("CloudPaymentService", "getPaymentPartnerOption", "epayment");
-  return await svc.invoke([{paymentorder, payoption}]);
-}
-
-router.post("/epayment/sendtopartner", async (req, res) => {
+router.get("/payoptions/:statusid", async (req, res) => {
   try {
-    const po = await getPaymentOrder(req.body.refno);
-    const payoption = await getPaymentPartnerOption({paymentorder: po, payoption: req.body.payoption});
+    const statusid = req.params.statusid;
+    const params = {statusid , ...req.body, ...req.query}
 
-    let formaction = payoption.paypartner.info && payoption.paypartner.info.testactionurl; 
-    if (payoption.paypartner && payoption.paypartner.checkout) {
-      formaction = payoption.paypartner.checkout.redirectUrl;
-    } 
-    if ( !formaction ) {
-      formaction = payoption.paypartner.actionurl;
-    }
-
-    res.redirect(formaction);
+    const pmt = await postPartnerPayment(params);
+    const args = buildArgs(pmt);
+    res.redirect(`/payment/success?${args}`);
   } catch (err) {
-    res.status(400).send(err.toString());
+    res.redirect(`/payment/error?msg=${err.toString()}`);
   }
-  
 })
+
+router.post("/payoptions/:statusid", async (req, res) => {
+  try {
+    const statusid = req.params.statusid;
+    const params = {statusid , ...req.body}
+    const pmt = await postPartnerPayment(params);
+    const args = buildArgs(pmt);
+    res.redirect(`/payment/success?${args}`);
+  } catch (err) {
+    res.redirect(`/payment/error?msg=${err.toString()}`);
+  }
+})
+
+const buildArgs = (pmt) => {
+  const data = {
+    orgcode: pmt.orgcode,
+    txnno: pmt.paymentrefid,
+    txndate: pmt.txndate,
+    amount: Number(pmt.amount),
+    paypartnerid: pmt.paypartnerid.toLowerCase(),
+    paidby: pmt.paidby,
+    email: pmt.email,
+  }
+  const args = [];
+  Object.keys(data).forEach(key =>
+    args.push(`${key}=${encodeURIComponent(data[key])}`)
+  );
+  return args.join("&")
+}
+
+
 
 module.exports = router;

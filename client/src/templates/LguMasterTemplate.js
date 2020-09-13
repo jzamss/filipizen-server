@@ -7,7 +7,7 @@ import FilipizenMasterTemplate from "./FilipizenMasterTemplate";
 const getLguLogo = (partner) => {
 
   return (
-    <Link to={`/partner/${partner.name}/services`}>
+    <Link to={`/partner/${partner?.name}/services`}>
       <Image src={require("../assets/legazpi.png")} height="39px" />
     </Link>
   );
