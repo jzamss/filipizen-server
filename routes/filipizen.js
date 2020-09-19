@@ -31,28 +31,41 @@ const postPartnerPayment = async (params) => {
   return await svc.invoke([params]);
 }
 
-router.get("/payoptions/:statusid", async (req, res) => {
-  try {
-    const statusid = req.params.statusid;
-    const params = {statusid , ...req.body, ...req.query}
 
-    const pmt = await postPartnerPayment(params);
-    const args = buildArgs(pmt);
-    res.redirect(`/payment/success?${args}`);
-  } catch (err) {
-    res.redirect(`/payment/error?msg=${err.toString()}`);
+let partnerError = "Our partner was not able to process your payment."
+partnerError += "Kindly verify that your credentials are correct upon submitting your payment.";
+
+router.get("/payoptions/:statusid", async (req, res) => {
+  const statusid = req.params.statusid;
+  
+  if (/error/i.test(statusid)) {
+    let error = ""
+    res.redirect(`/payment/error?msg=${partnerError}`);
+  } else {
+    try {
+      const params = {statusid , ...req.body, ...req.query}
+      const pmt = await postPartnerPayment(params);
+      const args = buildArgs(pmt);
+      res.redirect(`/payment/success?${args}`);
+    } catch (err) {
+      res.redirect(`/payment/error?msg=${err.toString()}`);
+    }
   }
 })
 
 router.post("/payoptions/:statusid", async (req, res) => {
-  try {
-    const statusid = req.params.statusid;
-    const params = {statusid , ...req.body}
-    const pmt = await postPartnerPayment(params);
-    const args = buildArgs(pmt);
-    res.redirect(`/payment/success?${args}`);
-  } catch (err) {
-    res.redirect(`/payment/error?msg=${err.toString()}`);
+  const statusid = req.params.statusid;
+  if (/error/i.test(statusid)) {
+    res.redirect(`/payment/error?msg=${partnerError}`);
+  } else {
+    try {
+      const params = {statusid , ...req.body}
+      const pmt = await postPartnerPayment(params);
+      const args = buildArgs(pmt);
+      res.redirect(`/payment/success?${args}`);
+    } catch (err) {
+      res.redirect(`/payment/error?msg=${err.toString()}`);
+    }
   }
 })
 

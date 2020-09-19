@@ -6,8 +6,15 @@ import PaymentSuccess from "./app/PaymentSuccess";
 import PaymentError from "./app/PaymentError";
 
 export default [
-  { name: "home", exact: true, path: "/", component: HomeScreen },
-  { name: "partners", path: "/partners", component: PartnerListScreen },
+  { 
+    name: "home", 
+    exact: true, 
+    path: "/", 
+    component: HomeScreen },
+  { 
+    name: "partners", 
+    path: "/partners", 
+    component: PartnerListScreen },
   {
     name: "services",
     path: "/partner/:partnerId/services",
@@ -27,5 +34,11 @@ export default [
     name: "error",
     path: "/payment/error",
     component: PaymentError,
+  },
+  { 
+    name: "systools", 
+    exact: true, 
+    path: "/admin/systool", 
+    component: HomeScreen 
   },
 ];

@@ -12,12 +12,6 @@ const http = require("http").createServer(app);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.set('view engine', 'pug');
-
-/* admin */
-const adminRoutes = require("./routes/admin");
-app.use("/admin", adminRoutes);
-
 anubis.start(app);
 
 /* setup client */

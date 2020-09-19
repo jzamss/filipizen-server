@@ -2,6 +2,7 @@ export * from "rptis-web";
 export * from "bpls-web";
 export * from "obo-web";
 export * from "waterworks-web";
+export * from "aklan-web";
 
 
 // Module and Server registration 
@@ -36,6 +37,13 @@ const modules = [
     title: "Waterworks",
     services: [
       { name: 'waterworksbilling', title: "Waterworks Billing", component: "WaterworksBillingWebController" },
+    ]
+  },
+  { 
+    name: "boracay", 
+    title: "Boracay",
+    services: [
+      { name: 'terminalticket', title: "Terminal Tickets", component: "TerminalTicketWebController" },
     ]
   },
 ];
