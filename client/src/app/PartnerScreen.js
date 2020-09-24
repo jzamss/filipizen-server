@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { Page, Title, Panel, List, Link, Spacer, Subtitle } from "rsi-react-web-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 
@@ -36,7 +35,6 @@ const PartnerServiceList = (props) => {
 };
 
 const PartnerScreen = (props) => {
-  const { partnerId } = useParams();
   const { partner } = props.location.state;
   const modules = getModules(partner)
 

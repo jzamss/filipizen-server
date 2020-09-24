@@ -30,6 +30,7 @@ const modules = [
       { name: 'occupancypermit', title: "Occupancy Permit Application", component: "OccupancyPermitWebController" },
       { name: 'registerprofessionals', title: "Register Professional", component: "ProfessionalWebController" },
       { name: 'apptracking', title: "Application Tracking", component: "AppTrackingWebController" },
+      { name: 'obobilling', title: "Building Permit Online Billing", component: "OboBillingWebController" },
     ]
   },
   { 

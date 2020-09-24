@@ -23,7 +23,7 @@ const getChildren = ({ children }) => {
 };
 
 const MasterTemplate = (props) => {
-  const { header, left, center, right, footer } = getChildren(props);
+  const { header, center, footer } = getChildren(props);
   return (
     <div className="template">
       <div className="row header">{header}</div>
@@ -32,9 +32,7 @@ const MasterTemplate = (props) => {
           <div className="main">{center} </div>
         </div>
       </div>
-      {/**
-        <div className="row footer">{footer}</div>
-       */}
+      <div className="row footer">{footer}</div>
     </div>
   );
 };

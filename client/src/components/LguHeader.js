@@ -6,21 +6,29 @@ const styles = {
   container: {
     padding: "4px 50px",
   },
+  title: {
+    color: "#ddd",
+    paddingLeft: 5,
+  }
 };
 
-const LguHeader = (props) => {
+const LguHeader = ({partner, Logo}) => {
   return (
     <AppBar>
         <Panel style={styles.container}>
           <Link to={{
-            pathname: `/partner/${props.partner?.name}/services`, 
-            state: {partner: props.partner}
+            pathname: `/partner/${partner.name}/services`, 
+            state: {partner: partner}
           }}>
-            <Panel width={270}>{props.Logo}</Panel>
+            <Panel row>
+              <div>{Logo}</div>
+              <span style={styles.title}>{partner.title}</span>
+            </Panel>
           </Link>
         </Panel>
     </AppBar>
   );
 };
+
 
 export default LguHeader;

@@ -58,6 +58,7 @@ const PartnerListScreen = (props) => {
   return (
     <FilipizenMasterTemplate>
       <Page>
+        <Spacer height={20} />
         <Title>Select a Partner Agency</Title>
         {loading && <CircularProgress size={20} />}
         <Spacer height={20} />
@@ -109,11 +110,5 @@ const PartnerList = (props) => {
     </Panel>
   );
 };
-
-const styles = {
-  container: {
-    margin: 20,
-  }
-}
 
 export default PartnerListScreen;

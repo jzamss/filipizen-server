@@ -1,14 +1,12 @@
 import React from "react";
-import { Image, Link} from "rsi-react-web-components";
+import { Image } from "rsi-react-web-components";
 import LguHeader from "../components/LguHeader";
 import FilipizenIcon from "../components/FilipizenIcon";
 import FilipizenMasterTemplate from "./FilipizenMasterTemplate";
 
 const getLguLogo = (partner) => {
   return (
-    <Link to={`/partner/${partner?.name}/services`}>
-      <Image src={`/assets/${partner.name}.png`}height="39px" />
-    </Link>
+      <Image style={{maxWidth: 60, width: "auto", height: "auto"}} src={`/assets/${partner.name}.png`} height="30px" />
   );
 };
 
