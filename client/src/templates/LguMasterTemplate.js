@@ -6,7 +6,7 @@ import FilipizenMasterTemplate from "./FilipizenMasterTemplate";
 
 const getLguLogo = (partner) => {
   return (
-      <Image style={{maxWidth: 60, width: "auto", height: "auto"}} src={`/assets/${partner.name}.png`} height="30px" />
+      <Image style={{maxWidth: 40, width: "auto", height: "auto"}} src={`/assets/${partner.name}.png`} height="30px" />
   );
 };
 
