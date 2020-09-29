@@ -20,6 +20,7 @@ const modules = [
     title: "Real Property",
     services: [
       { name: 'rptbilling', title: "Realty Tax Online Billing", component: "RptBillingWebController" },
+      { name: 'rpttaxclearance', title: "Online Realty Tax Clearance", component: "RealtyTaxClearanceWebController" },
     ]
   },
   { 
